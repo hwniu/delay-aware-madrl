@@ -1,0 +1,77 @@
+import math
+
+## 数据量 ##
+BYTE = 8
+KB = 1024*BYTE
+MB = 1024*KB
+GB = 1024*MB
+TB = 1024*GB
+
+## 频率量 ##
+HZ = 1
+KHZ = 1000*HZ
+MHZ = 1000*KHZ
+GHZ = 1000*MHZ
+THZ = 1000*GHZ
+
+CYBERTWIN_PER_MEC = 1
+MEC_NUM = 5
+CYBERTWIN_NUM = MEC_NUM * CYBERTWIN_PER_MEC
+CLOUD_NUM = 1
+UE_NUM_PER_CYBERTWIN = 50
+TASK_NUM_PER_STEP = UE_NUM_PER_CYBERTWIN * 0.4
+
+# W=(power(10,dBm/10))/1000
+NOISE_VARIANCE = math.pow(10, -17.4)/1000  # 单位W, -174dbm/HZ
+UE_MAX_UPLINK_POWER = math.pow(10, 2)/1000  # 单位W
+UE_D2D_POWER = math.pow(10, 0)/1000  # 单位W
+MEC_POWER = math.pow(10, 4.6)/1000  # 单位W
+
+
+UPLINK_BANDWIDTH = 20*MHZ
+UE_D2D_BANDWIDTH = 1*MHZ
+MEC_BETWEEN_BANDWIDTH = 20*MHZ
+
+UE_D2D_CARRIER_FREQUENCY = 2.4*GHZ
+MEC_BETWEEN_CARRIER_FREQUENCY = 30*GHZ
+
+AVERAGE_WIERD_RATE = 100*MB  # 100Mbits/s
+MAX_WIRED_RATE = 150*MB
+
+UE_COMPUTING = 1*GHZ
+MEC_COMPUTING = 5*GHZ
+CLOUD_COMPUTING = 20*GHZ
+
+UE_CACHE = 20*MB
+MEC_CACHE = 200*MB
+CLOUD_CACHE = 1*GB
+
+ENERGY_COEFFICIENT = math.pow(10, -28)
+MEC_ANTENNAS = 128
+
+DISTANCE_BETWEEN_MEC = 1000
+MAX_DISTANCE_UE = 500
+MEC_ADJACENT_NUM = 2
+
+# 该矩阵为对角元素为0对称矩阵，MEC_NUM x MEC_NUM, 每行有 MEC_ADJACENT_NUM 个 “1”, 预定义, 图论
+MEC_ADJACENT_MATRIX = [[0, 1, 0, 0, 1],
+                       [1, 0, 1, 0, 0],
+                       [0, 1, 0, 1, 0],
+                       [0, 0, 1, 0, 1],
+                       [1, 0, 0, 1, 0]]
+RICIAN_FACTOR = 0.8
+
+## TASK相关配置 ##
+MAX_MAX_TASK_TOLERANCE_DELAY = 2000  # 所有任务最大的最大容忍延迟不超过此值，单位为ms
+MIN_MAX_TASK_TOLERANCE_DELAY = 100  # 所有任务最小的最大容忍延迟不超过此值，单位为ms
+MAX_TASK_SIZE = 1*MB  # 最大任务大小，单位为字节（bit）
+MIN_TASK_SIZE = 500*KB  # 最小任务大小，单位为字节（bit）
+TASK_COMPUTING_DENSITY = 1200  # 代表每bit消耗的CPU cycles数量
+
+STEP = 5  # 5ms
+AVERAGE_POISSON_DELAY = 10  # 单位ms
+
+
+# 数据量化
+MEC_CHANNEL_DISCOUNT_FACTOR = math.pow(10, 170)
+UE_CHANNEL_DISCOUNT_FACTOR = 200
